@@ -29,6 +29,16 @@ class MainActivity : AppCompatActivity() {
         retrofit=getRetrofit()
 
         initUi()
+
+        handleRefresh()
+    }
+
+    private fun handleRefresh() {
+      biding.swiper.setOnRefreshListener {
+          searchByName("a")
+        biding.swiper.isRefreshing=false
+          biding.notFound.isVisible=false
+      }
     }
 
     private fun initUi() {
@@ -55,16 +65,26 @@ class MainActivity : AppCompatActivity() {
             val data= retrofit.create(AppiService::class.java).getSuperHero(query)
 
             if(data.isSuccessful){
-                val response:DataResponse?=data.body()
+                val res:DataResponse?=data.body()
 
-                if(response!=null){
+                if(res!=null && res.response!="error"){
                     runOnUiThread {
-                        biding.progressBar.isVisible=false
+                        biding.notFound.isVisible=false
+                        heroAdapter.updateList(res.superHeroes)
+                    }
+                }else{
+                    runOnUiThread{
+                        biding.notFound.isVisible=true
 
-                        heroAdapter.updateList(response.superHeroes)
                     }
                 }
+
+                runOnUiThread {
+                    biding.progressBar.isVisible=false
+                }
             }
+
+
 
         }
     }

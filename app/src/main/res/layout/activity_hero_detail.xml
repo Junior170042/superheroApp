@@ -41,6 +41,7 @@
         tools:ignore="ImageContrastCheck" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -50,6 +51,7 @@
         android:elevation="10dp"
         app:cardBackgroundColor="#908545F6"
         app:cardCornerRadius="12dp"
+        android:visibility="gone"
         android:layout_marginTop="240dp">
 
         <TextView

@@ -38,6 +38,7 @@ private lateinit var biding:ActivityHeroDetailBinding
                 runOnUiThread {
                     biding.pbDetail.isVisible=false
                     uiInit(response.body()!!)
+                    biding.cardDetail.isVisible=true
                 }
             }
         }
